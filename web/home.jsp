@@ -1,54 +1,74 @@
 <%@ page import="java.util.List" %>
-<%@ page import="models.Developer" %><%--
+<%@ page import="models.Task" %><%--
   Created by IntelliJ IDEA.
-  User: Kuat
-  Date: 27.09.2023
-  Time: 19:16
+  User: amant
+  Date: 29.09.2023
+  Time: 20:13
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Bitlab</title>
+<head >
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body>
-    <form action="/home" method="post">
-        <input type="text" name="developerName" placeholder="Insert name..."><br><br>
-        <input type="text" name="surname" placeholder="Insert surname"><br><br>
-        <input type="text" name="city" placeholder="Insert city"><br><br>
-        <input type="number" name="age" placeholder="Insert age"><br><br>
-        <button>ADD DEVELOPER</button>
-    </form>
-    <table cellpadding="10px">
-        <thead>
-            <th>ID</th>
-            <th>NAME</th>
-            <th>SURNAME</th>
-            <th>Birth city</th>
-            <th>DETAILS</th>
-        </thead>
-        <tbody>
-        <%
-            List<Developer> developers = (List<Developer>) request.getAttribute("razraby");
-            for (Developer developer : developers) {
-        %>
-            <tr>
-                <td><%=developer.getId()%></td>
-                <td><%=developer.getName()%></td>
-                <td><%=developer.getSurname()%></td>
-                <td><%=developer.getBirthCity()%></td>
-                <td>
-                    <form action="/details" method="get">
-                        <input type="hidden" name="id" value="<%=developer.getId()%>">
-                        <button>DETAILS</button>
-                    </form>
-                </td>
-            </tr>
-        <%
-            }
-        %>
-        </tbody>
-    </table>
+<body >
+        <%@include file="navbar.jsp"%>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            ADD TASK
+        </button>
 
+        <!-- Modal -->
+        <form action="/add-task-servlet" method="post">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="text" name="task_name" class="form-control mt-1" placeholder="Insert name">
+                            <input type="text" name="task_description" class="form-control mt-1" placeholder="Insert description">
+                            <input type="date" name="task_deadlineDate" class="form-control mt-1" placeholder="Insert deadline date">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">NAME</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col">DEADLINE DATE</th>
+            </tr>
+            </thead>
+            <tbody>
+            <%
+                List<Task> tasks = (List<Task>) request.getAttribute("tasks");
+                if(tasks != null){
+                    for (Task task: tasks) {
+            %>
+                <tr>
+                    <th scope="row"><%=task.getId()%></th>
+                    <td><%=task.getName()%></td>
+                    <td><%=task.getDescription()%></td>
+                    <td>@<%=task.getDeadlineDate()%></td>
+                </tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+        </table>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>
