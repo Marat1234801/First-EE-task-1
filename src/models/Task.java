@@ -6,6 +6,11 @@ public class Task {
     private String description;
     private String deadlineDate;
 
+    public Task(String name, String description, String deadlineDate) {
+        this.name = name;
+        this.description = description;
+        this.deadlineDate = deadlineDate;
+    }
     public Task(Long id, String name, String description, String deadlineDate) {
         this.id = id;
         this.name = name;

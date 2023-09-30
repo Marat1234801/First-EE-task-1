@@ -7,10 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Task;
+import validation.Validation;
 
 import java.io.IOException;
 
-@WebServlet(value = "/add-task-servlet")
+@WebServlet(value = "/addTask")
 public class AddTaskServlet extends HttpServlet {
 
     @Override
@@ -19,11 +20,8 @@ public class AddTaskServlet extends HttpServlet {
         String name = req.getParameter("task_name");
         String description = req.getParameter("task_description");
         String deadLineDate = req.getParameter("task_deadlineDate");
-        Task task = new Task();
-        task.setName(name);
-        task.setDescription(description);
-        task.setDeadlineDate(deadLineDate);
-        DBManager.addTask(task);
+        if(!Validation.emptyValues(name, description, deadLineDate))
+            DBManager.addTask(new Task(name, description, deadLineDate));
         resp.sendRedirect("/home");
     }
 }

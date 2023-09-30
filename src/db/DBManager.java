@@ -11,6 +11,18 @@ public class DBManager {
 
     private static Long id = 1L;
 
+    static {
+        DBManager.addTask( new Task("Do homework",
+                "I need to do my BITLAB homework",
+                "2023-09-14"));
+        DBManager.addTask( new Task("Go to University",
+                "I will have exams",
+                "2023-09-30"));
+        DBManager.addTask( new Task("Diploma preparation",
+                "I need to be ready for diploma",
+                "2023-10-11"));
+    }
+
     public static void addTask(Task task){
         task.setId(id);
         tasks.add(task);
