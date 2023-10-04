@@ -8,12 +8,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head >
+<head>
     <title>Home</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
-<body >
-<%@include file="navbar.jsp"%>
+<body>
+<%@include file="navbar.jsp" %>
 <div class="container-fluid">
     <!-- Button trigger modal -->
     <br>
@@ -32,8 +33,10 @@
                     </div>
                     <div class="modal-body">
                         <input type="text" name="task_name" class="form-control mt-1" placeholder="Insert name">
-                        <input type="text" name="task_description" class="form-control mt-1" placeholder="Insert description">
-                        <input type="date" name="task_deadlineDate" class="form-control mt-1" placeholder="Insert deadline date">
+                        <input type="text" name="task_description" class="form-control mt-1"
+                               placeholder="Insert description">
+                        <input type="date" name="task_deadlineDate" class="form-control mt-1"
+                               placeholder="Insert deadline date">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -50,26 +53,24 @@
             <th scope="col">ID</th>
             <th scope="col">NAME</th>
             <th scope="col">DESCRIPTION</th>
-            <th scope="col">DEADLINE DATE</th>
             <th scope="col">Details</th>
         </tr>
         </thead>
         <tbody>
         <%
             List<Task> tasks = (List<Task>) request.getAttribute("tasks");
-            if(tasks != null){
-                for (Task task: tasks) {
+            if (tasks != null) {
+                for (Task task : tasks) {
         %>
         <tr>
-            <th scope="row"><%=task.getId()%></th>
-            <td><%=task.getName()%></td>
-            <td><%=task.getDescription()%></td>
-            <td><%=task.getDeadlineDate()%></td>
+            <th scope="row"><%=task.getId()%>
+            </th>
+            <td><%=task.getName()%>
+            </td>
+            <td><%=task.getDescription()%>
+            </td>
             <td>
-                <form action="/detail" method="get" style="margin: 0;">
-                    <input type="hidden" name="id" value="<%=task.getId()%>">
-                    <button type="submit" class="btn btn-primary">Detail</button>
-                </form>
+                <a href="/task-details?id=<%=task.getId()%>" class="btn btn-dark">Details</a>
             </td>
         </tr>
         <%
@@ -79,6 +80,8 @@
         </tbody>
     </table>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package servlets;
 
 import db.DBManager;
+import db.DBUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +15,7 @@ public class DeleteTaskServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
-        DBManager.deleteTaskById(id);
+        DBUtils.deleteTaskById(id);
         resp.sendRedirect("/home");
     }
 }

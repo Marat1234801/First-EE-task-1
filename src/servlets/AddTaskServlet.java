@@ -1,6 +1,7 @@
 package servlets;
 
 import db.DBManager;
+import db.DBUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,7 +22,7 @@ public class AddTaskServlet extends HttpServlet {
         String description = req.getParameter("task_description");
         String deadLineDate = req.getParameter("task_deadlineDate");
         if(!Validation.emptyValues(name, description, deadLineDate))
-            DBManager.addTask(new Task(name, description, deadLineDate));
+            DBUtils.addTask(new Task(name, description, deadLineDate));
         resp.sendRedirect("/home");
     }
 }
